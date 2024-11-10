@@ -1,13 +1,15 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import MobileNavigation from "./components/MobileNavigation";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body>
-				<MobileNavigation />
-				<div>{children}</div>
+				<AuthProvider>
+					<MobileNavigation />
+					<div>{children}</div>
+				</AuthProvider>
 			</body>
 		</html>
 	);
