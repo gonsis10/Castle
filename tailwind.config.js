@@ -6,6 +6,10 @@ module.exports = {
 			colors: {
 				background: "var(--background)",
 				foreground: "var(--foreground)",
+				brand: {
+					DEFAULT: "#00664F", // Default Green
+				},
+				accent: "#FBBF24",
 			},
 		},
 	},

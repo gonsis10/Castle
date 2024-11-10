@@ -13,7 +13,7 @@ const MobileNavigation = () => {
 	const navigation = [
 		{ name: "Home", path: "/", icon: Home },
 		{ name: "Tasks", path: "/tasks", icon: ClipboardList },
-		{ name: "Castle", path: "/castle", icon: Castle },
+		{ name: "Shop", path: "/shop", icon: Castle },
 	];
 
 	const handleNavigation = (path) => {

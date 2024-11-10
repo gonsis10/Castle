@@ -1,7 +1,14 @@
-import React from "react";
+"use client";
+import "./tasks.css";
+import React, { useState } from "react";
+import { TodoWrapper } from "../components/TodoWrapper";
 
 const Tasks = () => {
-	return <div>Tasks</div>;
+	return (
+		<div className="App">
+			<TodoWrapper />
+		</div>
+	);
 };
 
 export default Tasks;

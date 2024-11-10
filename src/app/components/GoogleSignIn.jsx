@@ -20,6 +20,7 @@ const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 			// Call success callback if provided
 			if (onSignInSuccess) {
 				onSignInSuccess(userData);
+				console.log(userData);
 			}
 		} catch (error) {
 			console.error("Error during Google sign-in:", error);

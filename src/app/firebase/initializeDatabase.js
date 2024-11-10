@@ -1,5 +1,5 @@
 // helpers/firebaseUser.js
-import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, setDoc, getFirestore, collection, addDoc } from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -19,6 +19,8 @@ export const createUserDocument = async (user) => {
 			displayName: user.displayName,
 			photoURL: user.photoURL,
 			createdAt: new Date(),
+			score: 0,
+			level: 0,
 			// Add any additional fields you want to store
 		};
 
@@ -48,16 +50,103 @@ export const getUserData = async (uid) => {
 	return null;
 };
 
-export const updateUserData = async (uid, data) => {
-	if (!uid || !data) return null;
+// ADD TODO ITEM
+export const addTodoItem = async (user, text) => {
+	try {
+		const todoData = {
+			text,
+			createdAt: new Date(),
+			completed: false,
+		};
+
+		const userTodosRef = collection(db, "users", user.uid, "todos");
+		const docRef = await addDoc(userTodosRef, todoData);
+
+		return docRef.id;
+	} catch (error) {
+		console.error("Error adding todo item:", error);
+		throw error;
+	}
+};
+
+// DELETE TODO ITEM
+const deleteTodoItem = async (user, todoId, db) => {
+	try {
+		const todoRef = doc(db, "users", user.id, "todos", todoId);
+		await deleteDoc(todoRef);
+	} catch (error) {
+		console.error("Error deleting todo item:", error);
+		throw error;
+	}
+};
+
+// set and get score
+export const setScore = async (uid, score) => {
+	if (!uid || !score) return null;
 
 	const userRef = doc(db, "users", uid);
 
 	try {
-		await setDoc(userRef, data, { merge: true });
+		await setDoc(userRef, { score }, { merge: true });
 		return await getUserData(uid);
 	} catch (error) {
 		console.error("Error updating user document:", error);
 		throw error;
 	}
 };
+
+export const getscore = async (uid) => {
+	if (!uid) return null;
+
+	const userRef = doc(db, "users", uid);
+	const userSnap = await getDoc(userRef);
+
+	if (userSnap.exists()) {
+		return userSnap.data().score;
+	}
+
+	return null;
+};
+
+// set and get level
+
+export const setLevel = async (uid, level) => {
+	if (!uid || !level) return null;
+
+	const userRef = doc(db, "users", uid);
+
+	try {
+		await setDoc(userRef, { level }, { merge: true });
+		return await getUserData(uid);
+	} catch (error) {
+		console.error("Error updating user document:", error);
+		throw error;
+	}
+};
+
+export const getLevel = async (uid) => {
+	if (!uid) return null;
+
+	const userRef = doc(db, "users", uid);
+	const userSnap = await getDoc(userRef);
+
+	if (userSnap.exists()) {
+		return userSnap.data().level;
+	}
+
+	return null;
+};
+
+// export const updateUserData = async (uid, data) => {
+// 	if (!uid || !data) return null;
+
+// 	const userRef = doc(db, "users", uid);
+
+// 	try {
+// 		await setDoc(userRef, data, { merge: true });
+// 		return await getUserData(uid);
+// 	} catch (error) {
+// 		console.error("Error updating user document:", error);
+// 		throw error;
+// 	}
+// };
