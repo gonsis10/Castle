@@ -1,37 +1,18 @@
-import React from "react";
+"use client";
 
-const ProgressBar = (props) => {
-	const { bgcolor, completed } = props;
+import React from 'react';
+import "../tasks/tasks.css";
 
-	const containerStyles = {
-		height: 20,
-		width: "100%",
-		backgroundColor: "#e0e0de",
-		borderRadius: 50,
-		margin: 50,
-	};
-
-	const fillerStyles = {
-		height: "100%",
-		width: `${completed}%`,
-		backgroundColor: bgcolor,
-		borderRadius: "inherit",
-		textAlign: "right",
-	};
-
-	const labelStyles = {
-		padding: 5,
-		color: "white",
-		fontWeight: "bold",
-	};
-
-	return (
-		<div style={containerStyles}>
-			<div style={fillerStyles}>
-				<span style={labelStyles}>{`${completed}%`}</span>
-			</div>
-		</div>
-	);
+  const ProgressBar = ({ currentValue, maxValue, color }) => {
+    let percentage = (currentValue/maxValue)*100
+    return (
+        <div className="flex flex-row items-center px-4 gap-4 select-none">
+            <span className="whitespace-nowrap font-semibold text-sm w-12">{percentage}%</span>
+            <div className="w-full bg-black/40 rounded-full h-4">
+                <div className="h-4 rounded-full" style={{ width: `${percentage}%`, backgroundColor: `#${color}` }}></div>
+            </div>
+        </div>
+    );
 };
 
 export default ProgressBar;

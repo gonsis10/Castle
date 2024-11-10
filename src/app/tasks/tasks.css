@@ -91,3 +91,9 @@ h1 {
 .delete-icon {
 	cursor: pointer;
 }
+
+.progressBar {
+    appearance: none;
+    height: 5px;
+    border-radius: 100px;
+}
