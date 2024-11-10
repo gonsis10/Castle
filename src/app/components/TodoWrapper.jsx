@@ -12,7 +12,7 @@ export const TodoWrapper = () => {
 	const { user } = useAuth();
 
 	const addTodo = (todo) => {
-		const item = { task: todo, completed: false, isEditing: false };
+		const item = { task: todo, completed: false };
 		setTodos([...todos, item]);
 		addTodoItem(user, todo);
 	};
@@ -27,9 +27,9 @@ export const TodoWrapper = () => {
 		setTodos(todos.map((todo) => (todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo)));
 	};
 
-	const editTask = (task, id) => {
-		setTodos(todos.map((todo) => (todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo)));
-	};
+	// const editTask = (task, id) => {
+	// 	setTodos(todos.map((todo) => (todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo)));
+	// };
 
 	return (
 		<div className="TodoWrapper">
@@ -38,7 +38,7 @@ export const TodoWrapper = () => {
 			</h1>
 			<TodoForm addTodo={addTodo} />
 			{todos.map((todo) => (
-				<Todo key={todo.id} task={todo} deleteTodo={deleteTodo} editTodo={editTodo} toggleComplete={toggleComplete} />
+				<Todo key={todo.id} task={todo} deleteTodo={deleteTodo} toggleComplete={toggleComplete} />
 			))}
 		</div>
 	);
