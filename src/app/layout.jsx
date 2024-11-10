@@ -1,10 +1,14 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import MobileNavigation from "./components/MobileNavigation";
 
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body>{children}</body>
+			<body>
+				<MobileNavigation />
+				<div>{children}</div>
+			</body>
 		</html>
 	);
 }
