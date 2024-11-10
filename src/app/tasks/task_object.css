@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400..800&display=swap");
+
+.task_button {
+  border-radius: 25px;
+  background: #8a8989;
+  padding: 20px;
+  width: 326px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  text-align: left;
+}
+
+.button_text {
+  color: white;
+  font-family: "Baloo Tammudu 2", system-ui;
+  font-style: normal;
+  font-size: 25px;
+  padding-top: 10px;
+}
+
+.trashcan {
+    color: white;
+    width: 22px;
+    height: 31px;
+    padding-left: 30px;
+}
+
+.check_circle {
+    color: white;
+    width: 24px;
+    height: 31px;
+}
