@@ -1,15 +1,14 @@
 import React from "react";
-import "./task_object.css";
-import { MdRadioButtonUnchecked } from "react-icons/md";
-import { FaRegTrashCan } from "react-icons/fa6";
+import TaskBubble from "./Task.jsx";
 
-const taskBubble = () => {
-  return <div className="task_button">
-    <p className="button_text">This is a task name</p>
-    <MdRadioButtonUnchecked className="check_circle"/>
-    <FaRegTrashCan className="trashcan"/>
-  </div>;
-};
+const Page = () => {
+    return (
+        <div>
+            <TaskBubble name="Task name" IsChecked="true"/>
+        </div>
+    )
+}
 
 
-export default taskBubble;
+
+export default Page;

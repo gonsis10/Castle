@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@400..800&display=swap");
 
-.task_button {
+.task {
   border-radius: 25px;
   background: #8a8989;
   padding: 20px;
@@ -15,21 +15,9 @@
 
 .button_text {
   color: white;
-  font-family: "Baloo Tammudu 2", system-ui;
+  font-family: OCR A Std, monospace;
   font-style: normal;
   font-size: 25px;
-  padding-top: 10px;
+  text-align: center;
 }
 
-.trashcan {
-    color: white;
-    width: 22px;
-    height: 31px;
-    padding-left: 30px;
-}
-
-.check_circle {
-    color: white;
-    width: 24px;
-    height: 31px;
-}
