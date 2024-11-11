@@ -1,5 +1,5 @@
 // helpers/firebaseUser.js
-import { doc, getDoc, setDoc, getFirestore, collection, addDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc } from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -21,7 +21,6 @@ export const createUserDocument = async (user) => {
 			createdAt: new Date(),
 			score: 0,
 			level: 0,
-			// Add any additional fields you want to store
 		};
 
 		try {
@@ -50,19 +49,27 @@ export const getUserData = async (uid) => {
 	return null;
 };
 
+// read user data
+
 // ADD TODO ITEM
-export const addTodoItem = async (user, text) => {
+export const addTodoItem = async (user, todoId, todo) => {
 	try {
-		const todoData = {
-			text,
-			createdAt: new Date(),
-			completed: false,
-		};
+		const userId = user.uid;
+		// Input validation
+		// if (!todoId || typeof todoId !== "string") {
+		// 	throw new Error("Valid todoId is required");
+		// }
+		// if (!todo || typeof todo !== "object") {
+		// 	throw new Error("Valid todo object is required");
+		// }
 
-		const userTodosRef = collection(db, "users", user.uid, "todos");
-		const docRef = await addDoc(userTodosRef, todoData);
+		// Create document reference with the specific ID
+		const todoRef = doc(db, "users", userId, "todos", todoId);
 
-		return docRef.id;
+		// Set the document with the provided data
+		await setDoc(todoRef, todo);
+
+		return todoId;
 	} catch (error) {
 		console.error("Error adding todo item:", error);
 		throw error;
@@ -70,12 +77,20 @@ export const addTodoItem = async (user, text) => {
 };
 
 // DELETE TODO ITEM
-const deleteTodoItem = async (user, todoId, db) => {
+export const deleteTodoItem = async (user, todoId) => {
 	try {
-		const todoRef = doc(db, "users", user.id, "todos", todoId);
+		const userId = user.uid;
+		// Input validation
+
+		// Create document reference using string parameters
+		const todoRef = doc(db, "users", userId, "todos", todoId);
+
+		// Delete the document
 		await deleteDoc(todoRef);
+
+		console.log("Todo deleted successfully");
 	} catch (error) {
-		console.error("Error deleting todo item:", error);
+		console.error("Error in deleteTodoItem:", error);
 		throw error;
 	}
 };
@@ -109,7 +124,6 @@ export const getscore = async (uid) => {
 };
 
 // set and get level
-
 export const setLevel = async (uid, level) => {
 	if (!uid || !level) return null;
 
