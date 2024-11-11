@@ -22,10 +22,10 @@ export default function Home() {
 				<div className="mt-[1.5em]">
 					<h1 className="text-white">Hello, {user["displayName"]}!</h1>
 					<CurrentCastle />
-					<div className="HomeWrapper">
-						<h2 className="items-center flex-col font-extrabold">
+					<div className="HomeWrapper mt-14">
+						<div className="items-center flex-col font-extrabold">
 							<CurrentLevel className="flex" maxValue="20" />
-						</h2>
+						</div>
 						<div>
 							<ProgressBar className="flex" maxValue="20" />
 						</div>

@@ -16,6 +16,7 @@ export const CurrentCastle = () => {
 				// Set up the listener
 				unsubscribe = watchUserCastle(user.uid, (newCastle) => {
 					setDisplayCastle(newCastle);
+					console.log(newCastle);
 				});
 			} catch (err) {
 				console.log(err.message);

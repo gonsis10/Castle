@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import { watchUserScore, watchUserCastle, setUserCastle } from "../firebase/initializeDatabase";
 
 const CastleShopItem = ({ imagePath = "/api/placeholder/200/200", name = "Castle Name", price = 0 }) => {
-	const [displayCastle, setDisplayCastle] = useState("./c1.svg");
+	const [displayCastle, setDisplayCastle] = useState("");
 	const [score, setScore] = useState(0);
 	const { user } = useAuth();
 

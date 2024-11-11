@@ -1,6 +1,5 @@
 // helpers/firebaseUser.js
 import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot, runTransaction } from "firebase/firestore";
-import { CurrentCastle } from "../components/CurrentCastle";
 
 const db = getFirestore();
 

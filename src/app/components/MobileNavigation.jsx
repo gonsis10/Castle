@@ -32,7 +32,7 @@ const MobileNavigation = () => {
 						<button
 							key={item.name}
 							onClick={() => handleNavigation(item.path)}
-							className={`flex flex-col items-center justify-center space-y-1 ${isActive ? "text-brand" : "text-gray-600 hover:text-blue-600"}`}
+							className={`flex flex-col items-center justify-center space-y-1 ${isActive ? "text-green-600" : "text-gray-600 hover:text-brand"}`}
 						>
 							<Icon className="h-6 w-6" />
 							<span className="text-xs">{item.name}</span>
