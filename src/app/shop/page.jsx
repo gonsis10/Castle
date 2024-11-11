@@ -1,9 +1,10 @@
 import React from "react";
+import {CastleImage} from "../components/Castle"
 
 const Castle = () => {
-    return <div>
+    return <div className="App"> 
         <div>Your Castle:</div>
-        <div><Castle /></div>
+        <div><CastleImage /></div>
     </div>;
 };
 
