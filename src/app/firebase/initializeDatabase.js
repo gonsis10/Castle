@@ -1,5 +1,5 @@
 // helpers/firebaseUser.js
-import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot } from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -94,6 +94,58 @@ export const deleteTodoItem = async (user, todoId) => {
 		throw error;
 	}
 };
+
+export const watchUserTodos = (userId, onUpdate) => {
+	try {
+		// Create a reference to the user's todos subcollection
+		const todosRef = collection(db, "users", userId, "todos");
+
+		// Create a query against the collection
+		// const q = query(todosRef, where("userId", "==", userId)); // Remove this line if using subcollection
+
+		// Set up real-time listener
+		const unsubscribe = onSnapshot(
+			todosRef,
+			(snapshot) => {
+				const todos = snapshot.docs.map((doc) => ({
+					id: doc.id,
+					...doc.data(),
+				}));
+				onUpdate(todos);
+			},
+			(error) => {
+				console.error("Error in todos listener:", error);
+			}
+		);
+
+		// Return unsubscribe function
+		return unsubscribe;
+	} catch (error) {
+		console.error("Error setting up todos listener:", error);
+		throw new Error("Failed to set up todos listener");
+	}
+};
+
+// export const fetchUserTodos = async (user) => {
+// 	try {
+// 		// Create a reference to the todos collection
+// 		const todosRef = collection(db, "users", user.uid, "todos");
+
+// 		// Create a query against the collection
+// 		const docs = await getDocs(todosRef);
+
+// 		// Map the documents to an array of todo objects
+// 		const todos = docs.docs.map((doc) => ({
+// 			id: doc.id,
+// 			...doc.data(),
+// 		}));
+
+// 		return todos;
+// 	} catch (error) {
+// 		console.error("Error fetching todos:", error);
+// 		throw new Error("Failed to fetch todos");
+// 	}
+// };
 
 // set and get score
 export const setScore = async (uid, score) => {
