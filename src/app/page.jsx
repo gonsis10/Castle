@@ -1,5 +1,6 @@
 "use client";
 
+import "./home.css";
 import GoogleSignIn from "./components/GoogleSignIn";
 import { useAuth } from "./context/AuthContext";
 import { useRouter } from "next/navigation";
@@ -15,13 +16,13 @@ export default function Home() {
 	};
 
 	return (
-		<div>
+		<div className="App">
 			{user ? (
-				<div className="justify-content justify-center self-center">
-					<div className="flex">Hello {user["displayName"]}!</div>
+				<div className="">
+					<h1>Hello {user["displayName"]}!</h1>
 
-					<div className="flex">
-						<ProgressBar currentValue={user["score"]} maxValue="25" color="black" />
+					<div className="">
+						<ProgressBar maxValue="100" />
 					</div>
 				</div>
 			) : (
