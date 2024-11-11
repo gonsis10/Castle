@@ -10,6 +10,7 @@ export default function Home() {
 
 	const handleSignInSuccess = (userData) => {
 		setUser(userData);
+		console.log(user);
 	};
 
 	return (
@@ -17,11 +18,10 @@ export default function Home() {
 			{user ? (
 				<div className="justify-content justify-center self-center">
 					<div className="flex">Hello {user["displayName"]}!</div>
-                    
-                    <div className="flex"> 
-                        <ProgressBar currentValue={user["score"]} maxValue="25" color="black" />
-                    </div>
-                    
+
+					<div className="flex">
+						<ProgressBar currentValue={user["score"]} maxValue="25" color="black" />
+					</div>
 				</div>
 			) : (
 				<GoogleSignIn onSignInSuccess={handleSignInSuccess} onSignInError={(error) => alert(error.message)} />
