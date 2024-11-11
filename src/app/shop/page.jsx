@@ -1,5 +1,5 @@
 import React from "react";
-import { CastleImage } from "../components/CastleImage";
+import { CastleImage } from "../components/CurrentCastle";
 
 const Castle = () => {
 	return (

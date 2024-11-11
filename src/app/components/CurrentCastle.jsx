@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import Image from "next/image";
 
-export const CastleImage = () => {
+export const CurrentCastle = () => {
 	const [displayCastle, setDisplayCastle] = useState(null);
 	const { user } = useAuth();
 

@@ -15,6 +15,7 @@ const CastleImage = () => {
 		</div>
 	);
 };
+
 const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 	// const handleGoogle = async (e) => {
 	// 	const provider = await new GoogleAuthProvider();
