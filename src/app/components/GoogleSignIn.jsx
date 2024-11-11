@@ -26,6 +26,11 @@ const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 			const provider = new GoogleAuthProvider();
 			const result = await signInWithPopup(auth, provider);
 
+			const token = await result.user.getIdToken();
+
+			// Set the token as a cookie
+			document.cookie = `auth-token=${token}; path=/`;
+
 			// Create/get user document in Firestore
 			const userData = await createUserDocument(result.user);
 

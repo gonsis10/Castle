@@ -1,7 +1,7 @@
 // helpers/firebaseUser.js
-import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot, runTransaction } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection, deleteDoc, onSnapshot, runTransaction } from "firebase/firestore";
 
-const db = getFirestore();
+import { db } from "./firebaseConfig";
 
 export const createUserDocument = async (user) => {
 	if (!user) return null;
