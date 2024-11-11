@@ -4,6 +4,7 @@ import GoogleSignIn from "./components/GoogleSignIn";
 import { useAuth } from "./context/AuthContext";
 import { useRouter } from "next/navigation";
 import ProgressBar from "./components/ProgressBar";
+import { Castle } from "lucide-react";
 
 export default function Home() {
 	const { user, setUser } = useAuth();
