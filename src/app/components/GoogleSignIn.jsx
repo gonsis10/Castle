@@ -9,12 +9,7 @@ const CastleImage = () => {
 	return (
 		<div className="title">
 			<div className="castle">
-				<img 
-				src="./castle.webp" 
-				alt="castle" 
-				className="castle castle-image" 
-				height="200px"
-				/>
+				<img src="./castle.webp" alt="castle" className="castle castle-image" height="200px" />
 			</div>
 			<h1>Castle</h1>
 		</div>
@@ -50,8 +45,8 @@ const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 		<div>
 			<CastleImage />
 			<div className="login-button">
-				<button onClick={handleGoogle} className="bg-green-500 text-white p-5">
-					Sign In
+				<button onClick={handleGoogle} className="bg-green-600 text-white rounded-2xl p-4">
+					Sign In With Google
 				</button>
 			</div>
 		</div>
