@@ -1,5 +1,5 @@
 // helpers/firebaseUser.js
-import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot, runTransaction } from "firebase/firestore";
 
 const db = getFirestore();
 
@@ -125,39 +125,64 @@ export const watchUserTodos = (userId, onUpdate) => {
 		throw new Error("Failed to set up todos listener");
 	}
 };
-
-// export const fetchUserTodos = async (user) => {
-// 	try {
-// 		// Create a reference to the todos collection
-// 		const todosRef = collection(db, "users", user.uid, "todos");
-
-// 		// Create a query against the collection
-// 		const docs = await getDocs(todosRef);
-
-// 		// Map the documents to an array of todo objects
-// 		const todos = docs.docs.map((doc) => ({
-// 			id: doc.id,
-// 			...doc.data(),
-// 		}));
-
-// 		return todos;
-// 	} catch (error) {
-// 		console.error("Error fetching todos:", error);
-// 		throw new Error("Failed to fetch todos");
-// 	}
-// };
-
-// set and get score
-export const setScore = async (uid, score) => {
-	if (!uid || !score) return null;
-
-	const userRef = doc(db, "users", uid);
-
+export const watchUserScore = (userId, onUpdate) => {
 	try {
-		await setDoc(userRef, { score }, { merge: true });
-		return await getUserData(uid);
+		// Create a reference to the user's document
+		const userDocRef = doc(db, "users", userId);
+
+		// Set up real-time listener
+		const unsubscribe = onSnapshot(
+			userDocRef,
+			(snapshot) => {
+				if (snapshot.exists()) {
+					const data = snapshot.data();
+					const score = data.score; // Access the `score` field
+					onUpdate(score); // Call the onUpdate callback with the score value
+				} else {
+					console.warn("User document does not exist.");
+					onUpdate(null); // Optionally handle non-existent documents
+				}
+			},
+			(error) => {
+				console.error("Error in user score listener:", error);
+			}
+		);
+
+		// Return unsubscribe function
+		return unsubscribe;
 	} catch (error) {
-		console.error("Error updating user document:", error);
+		console.error("Error setting up user score listener:", error);
+		throw new Error("Failed to set up user score listener");
+	}
+};
+// set and get score
+
+export const updateScore = async (userId, amount) => {
+	try {
+		const userRef = doc(db, "users", userId);
+
+		// Use a transaction to ensure score updates are atomic
+		await runTransaction(db, async (transaction) => {
+			const userDoc = await transaction.get(userRef);
+
+			if (!userDoc.exists()) {
+				throw new Error("User document does not exist!");
+			}
+
+			const currentScore = userDoc.data().score || 0;
+			const newScore = currentScore + amount;
+
+			// Prevent negative scores if needed
+			// const finalScore = Math.max(0, newScore);
+
+			transaction.update(userRef, {
+				score: newScore,
+			});
+		});
+
+		return true;
+	} catch (error) {
+		console.error("Error updating score:", error);
 		throw error;
 	}
 };
