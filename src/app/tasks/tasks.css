@@ -41,7 +41,7 @@ h1 {
 .todo-input {
 	outline: none;
 	background: none;
-	border: 1px solid #a62714;
+	border: 1px solid #4dc591;
 	padding: 0.5rem 1rem;
 	margin-top: 1rem;
 	margin-bottom: 2rem;
@@ -54,7 +54,7 @@ h1 {
 }
 
 .todo-btn {
-	background: #a62714;
+	background: #4dc591;
 	color: #fff;
 	border: none;
 	padding: 0.55rem;
@@ -65,7 +65,7 @@ h1 {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: #a62714;
+	background: #4dc591;
 	color: #fff;
 	padding: 0.75rem 1rem;
 	border-radius: 5px;

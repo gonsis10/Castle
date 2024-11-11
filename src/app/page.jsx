@@ -19,11 +19,11 @@ export default function Home() {
 	return (
 		<div>
 			{user ? (
-				<div>
-					<h1>Hello {user["displayName"]}!</h1>
+				<div className="mt-[1.5em]">
+					<h1 className="text-white">Hello, {user["displayName"]}!</h1>
 					<CurrentCastle />
-					<div className="">
-						<h2 className="items-center flex-col text-white font-extrabold">
+					<div className="HomeWrapper">
+						<h2 className="items-center flex-col font-extrabold">
 							<CurrentLevel className="flex" maxValue="20" />
 						</h2>
 						<div>
