@@ -1,6 +1,3 @@
-import React from "react";
-import { Leaf } from "lucide-react";
-
 const NotFound = () => {
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100 flex items-center justify-center p-4">
@@ -16,7 +13,7 @@ const NotFound = () => {
 				{/* Description */}
 				<div className="space-y-4">
 					<h2 className="text-2xl font-semibold text-green-800">Oops! Page Not Found</h2>
-					<p className="text-green-700">Looks like you've wandered into uncharted territory. The page you're looking for has gone on an adventure without us.</p>
+					<p className="text-green-700">Looks like you&apos;ve wandered into uncharted territory. The page you&apos;re looking for has gone on an adventure without us.</p>
 				</div>
 
 				{/* Back Home Button */}
