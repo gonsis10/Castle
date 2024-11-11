@@ -149,6 +149,7 @@ export const watchUserTodos = (userId, onUpdate) => {
 		throw new Error("Failed to set up todos listener");
 	}
 };
+
 export const watchUserScore = (userId, onUpdate) => {
 	try {
 		// Create a reference to the user's document
@@ -161,6 +162,37 @@ export const watchUserScore = (userId, onUpdate) => {
 				if (snapshot.exists()) {
 					const data = snapshot.data();
 					const score = data.score; // Access the `score` field
+					onUpdate(score); // Call the onUpdate callback with the score value
+				} else {
+					console.warn("User document does not exist.");
+					onUpdate(null); // Optionally handle non-existent documents
+				}
+			},
+			(error) => {
+				console.error("Error in user score listener:", error);
+			}
+		);
+
+		// Return unsubscribe function
+		return unsubscribe;
+	} catch (error) {
+		console.error("Error setting up user score listener:", error);
+		throw new Error("Failed to set up user score listener");
+	}
+};
+
+export const watchUserCastle = (userId, onUpdate) => {
+	try {
+		// Create a reference to the user's document
+		const userDocRef = doc(db, "users", userId);
+
+		// Set up real-time listener
+		const unsubscribe = onSnapshot(
+			userDocRef,
+			(snapshot) => {
+				if (snapshot.exists()) {
+					const data = snapshot.data();
+					const score = data.currentCastle; // Access the `score` field
 					onUpdate(score); // Call the onUpdate callback with the score value
 				} else {
 					console.warn("User document does not exist.");

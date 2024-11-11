@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
-import Image from "next/image";
+import { watchUserCastle } from "../firebase/initializeDatabase";
 
 export const CurrentCastle = () => {
-	const [displayCastle, setDisplayCastle] = useState(null);
+	const [displayCastle, setDisplayCastle] = useState("./c1.svg");
 	const { user } = useAuth();
 
 	useEffect(() => {
@@ -14,16 +14,8 @@ export const CurrentCastle = () => {
 		if (user) {
 			try {
 				// Set up the listener
-				unsubscribe = watchUserScore(user.uid, (newScore) => {
-					setDisplayCastle(<Image src="src\app\shop\tent.png" alt="tent" />);
-
-					// if (newScore >= 3 && newScore < 5) {
-					// 	return <Image src="src\app\shop\shack.png" alt="shack" />;
-					// }
-
-					// if (newScore >= 5) {
-					// 	return <Image src="src\app\shop\castle.png" alt="castle" />;
-					// }
+				unsubscribe = watchUserCastle(user.uid, (newCastle) => {
+					setDisplayCastle(newCastle);
 				});
 			} catch (err) {
 				console.log(err.message);
@@ -37,5 +29,9 @@ export const CurrentCastle = () => {
 		};
 	}, [user]);
 
-	return <div>{displayCastle}</div>;
+	return (
+		<div>
+			<img src={displayCastle} className="w-full h-full object-contain" />
+		</div>
+	);
 };
