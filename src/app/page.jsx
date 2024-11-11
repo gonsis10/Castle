@@ -16,17 +16,16 @@ export default function Home() {
     };
 
     return (
-        <div className="App">
+        <div>
             {user ? (
-                <div className="">
+                <div>
                     <h1>Hello {user["displayName"]}!</h1>
-                    <div>
-                        <ProgressBar maxValue="20" />
+                    <div className="items-center flex-col">
+                        <CurrentLevel className="flex" maxValue="20" />
                     </div>
                     <div>
-                        <CurrentLevel maxValue="20" />
+                        <ProgressBar className="flex" maxValue="20" />
                     </div>
-
                 </div>
             ) : (
                 <GoogleSignIn onSignInSuccess={handleSignInSuccess} onSignInError={(error) => alert(error.message)} />

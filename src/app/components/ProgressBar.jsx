@@ -4,7 +4,7 @@ import React from 'react';
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { watchUserScore } from "../firebase/initializeDatabase";
-import "../tasks/tasks.css";
+import "../home.css";
 
   const ProgressBar = ({ maxValue }) => {
     const [score, setScore] = useState(0);
