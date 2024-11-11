@@ -3,7 +3,23 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { createUserDocument } from "../firebase/initializeDatabase";
+import "../login/login.css";
 
+const CastleImage = () => {
+	return (
+		<div className="title">
+			<div className="castle">
+				<img 
+				src="./castle.webp" 
+				alt="castle" 
+				className="castle castle-image" 
+				height="200px"
+				/>
+			</div>
+			<h1>Castle</h1>
+		</div>
+	);
+};
 const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 	// const handleGoogle = async (e) => {
 	// 	const provider = await new GoogleAuthProvider();
@@ -32,9 +48,12 @@ const GoogleSignIn = ({ onSignInSuccess, onSignInError }) => {
 
 	return (
 		<div>
-			<button onClick={handleGoogle} className="bg-green-500 text-white p-5">
-				Sign In
-			</button>
+			<CastleImage />
+			<div className="login-button">
+				<button onClick={handleGoogle} className="bg-green-500 text-white p-5">
+					Sign In
+				</button>
+			</div>
 		</div>
 	);
 };
