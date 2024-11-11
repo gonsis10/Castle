@@ -93,7 +93,7 @@ h1 {
 }
 
 .progressBar {
-    appearance: none;
-    height: 5px;
-    border-radius: 100px;
+	appearance: none;
+	height: 5px;
+	border-radius: 100px;
 }
