@@ -1,5 +1,6 @@
 // helpers/firebaseUser.js
 import { doc, getDoc, setDoc, getFirestore, collection, addDoc, deleteDoc, getDocs, onSnapshot, runTransaction } from "firebase/firestore";
+import { CurrentCastle } from "../components/CurrentCastle";
 
 const db = getFirestore();
 
@@ -20,7 +21,7 @@ export const createUserDocument = async (user) => {
 			photoURL: user.photoURL,
 			createdAt: new Date(),
 			score: 0,
-			level: 0,
+			currentCastle: "./c1.svg",
 		};
 
 		try {
@@ -49,7 +50,30 @@ export const getUserData = async (uid) => {
 	return null;
 };
 
-// read user data
+export const setUserCastle = async (user, castle) => {
+	if (!user) return null;
+
+	// Reference to the user's document
+	const userRef = doc(db, "users", user.uid);
+
+	// Check if user document exists
+	const userSnap = await getDoc(userRef);
+
+	try {
+		if (!userSnap.exists()) {
+			// If the document doesn't exist, create it with the castle field
+			await setDoc(userRef, { currentCastle: castle });
+			console.log("Set new castle");
+		} else {
+			// If the document exists, update the currentCastle field
+			await setDoc(userRef, { currentCastle: castle }, { merge: true });
+			console.log("Updated castle");
+		}
+	} catch (error) {
+		console.error("Error setting castle:", error);
+		throw error;
+	}
+};
 
 // ADD TODO ITEM
 export const addTodoItem = async (user, todoId, todo) => {
