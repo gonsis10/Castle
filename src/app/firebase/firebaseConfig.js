@@ -8,12 +8,12 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-	authDomain: "castle-e7b71.firebaseapp.com",
-	projectId: "castle-e7b71",
-	storageBucket: "castle-e7b71.firebasestorage.app",
-	messagingSenderId: "895578981185",
-	appId: "1:895578981185:web:008be2686730764de157c0",
+	apiKey: "AIzaSyDjupNq5CYZVhitpRGvHVxE1GaX15e6xR8",
+	authDomain: "castle-de289.firebaseapp.com",
+	projectId: "castle-de289",
+	storageBucket: "castle-de289.firebasestorage.app",
+	messagingSenderId: "698080519093",
+	appId: "1:698080519093:web:b60ac1472e1a88cdf1effc",
 };
 
 // Initialize Firebase
